@@ -2,7 +2,7 @@
 #define RecordingSchedule_h
 
 #include "Arduino.h"
-#include <RTClib.h>
+#include <RTClib.h> // from https://github.com/adafruit/RTClib
 #include <Wire.h>
 
 struct Schedule{

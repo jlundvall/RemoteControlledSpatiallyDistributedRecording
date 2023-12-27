@@ -1,16 +1,16 @@
-#ifndef Radio_h
-#define Radio_h
+#ifndef RFtransceiver_h
+#define RFtransceiver_h
 
 #include "Arduino.h"
 #include <SPI.h>
-#include <RH_RF69.h>
+#include <RH_RF69.h> // from https://github.com/PaulStoffregen/RadioHead/tree/master
 
 // RFM69HCW pins
 #define RFM69_CS            10
 #define RFM69_INT           2
 
 #define RF69_FREQ           433.0
-#define RESEND_INTERVAL     1000
+#define RESEND_INTERVAL     100
 #define NUM_RESENDS         3
 
 //important addresses

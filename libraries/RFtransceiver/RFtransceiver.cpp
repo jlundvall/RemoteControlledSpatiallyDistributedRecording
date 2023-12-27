@@ -1,4 +1,4 @@
-#include "Radio.h"
+#include "RFtransceiver.h"
 
 // Singleton instance of the radio driver
 RH_RF69 driver(RFM69_CS,RFM69_INT);
@@ -19,7 +19,7 @@ bool Radio_init(){
   }
 
   // ishighpowermodule is true 
-  driver.setTxPower(14, true);
+  driver.setTxPower(7, true);
 
   driver.setHeaderFrom(CONTROLLER_ADDRESS);
   driver.setHeaderTo(BROADCAST_ADDRESS);
@@ -37,7 +37,7 @@ void Controller_sendStartRecording(){
 
 void Controller_sendStopRecording(){
 
-    char msg[20] = "stop";
+    char msg[6] = "stop";
     //Serial.print("Sending "); Serial.println(msg);
     driver.send((uint8_t *)msg, strlen(msg));
     driver.waitPacketSent();
@@ -75,15 +75,8 @@ bool Controller_checkNodeResponse(uint8_t i){
 uint16_t Controller_ConnectionTest(uint16_t activeNodes){
   uint16_t respondingNodes = 0;
   for(uint8_t i = 0; i < 32; i++){
-    if(activeNodes & (1 << i)){
-        // Serial.print("found 1, so sending to node: ");
-        // Serial.println(i);
-
-        
-    
+    if(activeNodes & (1 << i)){    
         if(Controller_checkNodeResponse(i)){
-            // Serial.print(i);
-            // Serial.println(" responded");
             respondingNodes |= (1<<i);
         }
     }

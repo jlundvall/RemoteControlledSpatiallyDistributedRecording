@@ -81,7 +81,6 @@ uint8_t Schedule_timeToRecord(Schedule sched, bool debug){
                     
                     action = START;
                     return action;
-                    //USB_startRecording();
                     }else{
                         state = WAITING;
                         break;
@@ -102,7 +101,6 @@ uint8_t Schedule_timeToRecord(Schedule sched, bool debug){
             }
             action = STOP;
             return action;
-            //USB_stopRecording();
 
             }else{
             state = RECORDING;
@@ -123,8 +121,6 @@ uint8_t Schedule_timeToRecord(Schedule sched, bool debug){
                     }
                     action = START;
                     return action;
-                    //USB_startRecording();
-                   // break;
 
 
                 }else{
