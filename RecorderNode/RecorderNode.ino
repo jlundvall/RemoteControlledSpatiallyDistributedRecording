@@ -2,25 +2,26 @@
 #include "Record.h"
 #include "ButtonInterrupt.h"
 
-#define debugMode  1
+#define debugMode  0
 
-#define MYADDRESS 3
+#define MYADDRESS 1
 #define CONTROLLERADDRESS 0
 
 
 #define RFM69_RST     4
 #define LED           9
-#define SQUAD_TRIGGER 8
+#define SQUAD_TRIGGER 6
 
 
 void setup() {
-  if(debugMode){
-    Serial.begin(9600);
-    while (!Serial);
-  }
+  Serial.begin(9600);
+  while (!Serial);
+ 
   
   Button_init(); //button uses pin 3
 
+  pinMode(SQUAD_TRIGGER, OUTPUT);
+  digitalWrite(SQUAD_TRIGGER, LOW);
   //manual reset of radio
   pinMode(RFM69_RST, OUTPUT);
   digitalWrite(RFM69_RST, LOW);
@@ -49,7 +50,7 @@ void loop() {
 
   uint8_t msg = Node_handleReceivedMsg(MYADDRESS);
   if (msg == 2 && !recordingStatus){
-    if(debugMode) Serial.println("starting");
+    if(debugMode) {Serial.println("starting");}
     USB_startRecording();
     Pin_trigger(SQUAD_TRIGGER);
     digitalWrite(LED, HIGH);
